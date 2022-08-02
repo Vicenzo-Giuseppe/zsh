@@ -1,0 +1,2 @@
+#+title: Zsh Config on my BigLinux :brazil: :heart:
+

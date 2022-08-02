@@ -1,4 +1,4 @@
-export ZPLUGINDIR=$ZDOTDIR
+#!/bin/sh
 
 red='\033[1;31m'
 rset='\033[0m'
@@ -10,12 +10,12 @@ function add_file() {
 }
 
 function add() {
-    [ -f "$ZPLUGINDIR/$1" ] && source "$ZPLUGINDIR/$1"
+    [ -f "$ZDOTDIR/$1" ] && source "$ZDOTDIR/$1"
 }
 
 function add_plugin() {
     PLUGIN_NAME=$(echo $1 | cut -d "/" -f 2)
-    if [ -d "$ZPLUGINDIR/plugins/$PLUGIN_NAME" ]; then 
+    if [ -d "$ZDOTDIR/plugins/$PLUGIN_NAME" ]; then 
         # For plugins
        add "plugins/$PLUGIN_NAME/$PLUGIN_NAME.plugin.zsh" || \
        add "plugins/$PLUGIN_NAME/$PLUGIN_NAME.zsh"
@@ -25,7 +25,7 @@ function add_plugin() {
         echo -e "$grn  ----------------------------------------------------------------$rset"
         echo -e "$red             Installing Plugin :: $blue $PLUGIN_NAME              $rset"
         echo -e "$grn  ----------------------------------------------------------------$rset"
-        git clone "https://github.com/$1.git" "$ZPLUGINDIR/plugins/$PLUGIN_NAME"
+        git clone "https://github.com/$1.git" "$ZDOTDIR/plugins/$PLUGIN_NAME"
     fi
 }
 

@@ -1,20 +1,7 @@
 #!/bin/sh
 #--------SSH---------
-eval `keychain --eval --agents ssh key` 
-clear
-#--------------------
-export ZDOTDIR=$HOME/.config/zsh/
-source "$ZDOTDIR/functions.sh"
-add_file "exports"
-add_file "vim-mode"
-add_file "aliases"
-add_file "keybinds"
-add_plugin "zsh-users/zsh-autosuggestions"
-add_plugin "zsh-users/zsh-syntax-highlighting"
-add_plugin "hlissner/zsh-autopair"
-add_plugin "agkozak/zsh-z"
-add_plugin "asdf-vm/asdf"
-eval "$(starship init zsh)"
+#eval `keychain --eval --agents ssh key` 
+#clear
 #--------------------
 setopt appendhistory
 # some useful options (man zshoptions)
@@ -26,7 +13,6 @@ zle_highlight=('paste:none')
 unsetopt BEEP
 # completions
 autoload -Uz compinit
-zstyle ':completion:*' menu select
 # zstyle ':completion::complete:lsof:*' menu yes select
 zmodload zsh/complist
 # compinit
@@ -37,17 +23,28 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 # Colors
 autoload -Uz colors && colors
+# Key-bindings
+bindkey -s '^f' 'zi^M'
+bindkey -s '^s' 'ncdu^M'
+# bindkey -s '^n' 'nvim $(fzf)^M'
+# bindkey -s '^v' 'nvim\n'
+bindkey -s '^z' 'zi^M'
+bindkey '^[[P' delete-char
+bindkey "^p" up-line-or-beginning-search # Up
+bindkey "^n" down-line-or-beginning-search # Down
+bindkey "^k" up-line-or-beginning-search # Up
+bindkey "^j" down-line-or-beginning-search # Down
+bindkey -r "^u"
+bindkey -r "^d"
 # Edit line in vim with ctrl-e:
+compinit
 autoload edit-command-line; zle -N edit-command-line
 # bindkey '^e' edit-command-line
-# TODO Remove these
-setxkbmap -option caps:escape
-xset r rate 210 40
-# Speedy keys
-xset r rate 210 40
-# remap caps to escape
-setxkbmap -option caps:escape
-# swap escape and caps
-# setxkbmap -option caps:swapescape
-colorscript random
+# For QT Themes
+export QT_QPA_PLATFORMTHEME=qt5ct
+#--------------------
+export ZDOTDIR=$HOME/.config/zsh/
+source "$ZDOTDIR/functions.sh"
+add_file "exports"
+#--------------------
 
